@@ -4,16 +4,15 @@ import java.math.BigDecimal
 import java.math.MathContext
 
 @Suppress("MemberVisibilityCanBePrivate")
-class Vector3D(val x: BigDecimal, val y: BigDecimal, val z: BigDecimal) {
-    init {
-        x.setScale(256)
-        y.setScale(256)
-        z.setScale(256)
-    }
+class Vector3D(x: BigDecimal, y: BigDecimal, z: BigDecimal) {
+    val x: BigDecimal = x.setScale(Config.power)
+    val y: BigDecimal = y.setScale(Config.power)
+    val z: BigDecimal = z.setScale(Config.power)
+
     constructor(x: Int,y: Int, z: Int): this(BigDecimal(x), BigDecimal(y), BigDecimal(z))
 
     constructor(x: Long,y: Long, z: Long): this(BigDecimal(x), BigDecimal(y), BigDecimal(z))
-    val length: BigDecimal = (x.pow(2) + y.pow(2) + z.pow(2)).sqrt(MathContext.DECIMAL128).setScale(256)
+    val length: BigDecimal = (x.pow(2) + y.pow(2) + z.pow(2)).sqrt(MathContext.DECIMAL128)
 
     operator fun plus(other: Vector3D): Vector3D {
         return Vector3D(x + other.x, y + other.y, z + other.z)

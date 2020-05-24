@@ -7,12 +7,10 @@ import kotlin.math.pow
 object Config {
     val c: BigDecimal = BigDecimal(299792458)
         get() = BigDecimal(getValue(field.toInt(), "light_speed", comment = "Скорость света"))
-    private val base: Int = 10
-        get() = getValue(field, "quantization", "base", comment = "Основание модификатора квантования")
     val power = 60
         get() = getValue(field, "quantization", "power", comment = "Показатель модификатора квантования. Положителен")
     val quantization_coefficient: BigDecimal
-        get() = BigDecimal(base.toDouble().pow(power))
+        get() = BigDecimal(10.toDouble().pow(power)).setScale(power * 2)
     private val g_base = 10
         get() = getValue(field, "gravitational_constant", "base", comment = "Основание")
     private val g_power = -11
